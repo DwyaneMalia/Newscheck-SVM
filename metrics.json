@@ -1,0 +1,38 @@
+{
+  "test_accuracy": 0.9900964295022153,
+  "training_articles": 30694,
+  "testing_articles": 7674,
+  "labels": {
+    "0": "Fake",
+    "1": "Real"
+  },
+  "input": "Full English article body",
+  "python_version": "3.13.18",
+  "classification_report": {
+    "Fake": {
+      "precision": 0.9947810959698463,
+      "recall": 0.9833763255947263,
+      "f1-score": 0.9890458345344479,
+      "support": 3489.0
+    },
+    "Real": {
+      "precision": 0.9862721893491124,
+      "recall": 0.9956989247311828,
+      "f1-score": 0.9909631391200951,
+      "support": 4185.0
+    },
+    "accuracy": 0.9900964295022153,
+    "macro avg": {
+      "precision": 0.9905266426594794,
+      "recall": 0.9895376251629546,
+      "f1-score": 0.9900044868272715,
+      "support": 7674.0
+    },
+    "weighted avg": {
+      "precision": 0.9901407813740981,
+      "recall": 0.9900964295022153,
+      "f1-score": 0.9900914326177075,
+      "support": 7674.0
+    }
+  }
+}

@@ -1,0 +1,78 @@
+/* Shared colors used throughout the page. */
+:root {
+  color-scheme: light;
+  --ink: #172e31;
+  --muted: #5d6e6f;
+  --line: #dbe1da;
+  --green: #24604e;
+}
+
+/* Base page layout, header, and introduction. */
+* { box-sizing: border-box; }
+body { margin: 0; background: #f6f7f1; color: var(--ink); font: 16px/1.6 "Segoe UI", Arial, sans-serif; }
+.page { max-width: 1140px; padding: 0 40px; margin: auto; }
+header { display: flex; align-items: center; justify-content: space-between; padding: 28px 0; border-bottom: 1px solid var(--line); }
+.brand { display: inline-flex; align-items: center; gap: 9px; color: var(--ink); font-size: 23px; font-weight: 750; letter-spacing: -1px; text-decoration: none; }
+.brand-mark { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 9px; background: var(--ink); color: white; font: italic 24px Georgia, serif; }
+.brand-dot { color: var(--green); margin-left: -9px; }
+.header-note { color: var(--muted); font-size: 13px; }
+.intro { padding: 48px 0 32px; }
+.eyebrow { margin: 0 0 15px; color: var(--green); font-size: 11px; font-weight: 750; letter-spacing: 2px; }
+h1 { margin: 0; font: 400 64px/1.04 Georgia, "Times New Roman", serif; letter-spacing: -2px; }
+.intro-copy { max-width: 480px; margin: 20px 0 0; color: var(--muted); }
+/* Desktop: article form on the left, prediction and model details on the right. */
+.workspace { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+.article-panel { padding: 28px; background: white; border: 1px solid var(--line); border-radius: 14px; }
+.panel-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 23px; }
+h2 { margin: 0; font-size: 18px; line-height: 1.4; }
+.tag { padding: 4px 8px; background: #f0f3ee; border-radius: 4px; color: var(--muted); font-size: 9px; letter-spacing: 1px; white-space: nowrap; }
+/* Article input and form actions, including visible keyboard focus. */
+label { display: block; margin-bottom: 9px; font-size: 13px; font-weight: 600; }
+textarea { display: block; width: 100%; min-height: 273px; padding: 16px; resize: vertical; border: 1px solid #ced8d1; border-radius: 8px; background: #fcfdfb; color: var(--ink); font: 14px/1.7 "Segoe UI", Arial, sans-serif; }
+textarea::placeholder { color: #788481; }
+textarea:focus-visible, a:focus-visible, button:focus-visible { outline: 3px solid #86bba2; outline-offset: 3px; }
+.help { color: var(--muted); font-size: 12px; margin: 10px 0 22px; }
+.actions { display: flex; align-items: center; gap: 24px; }
+button { display: flex; justify-content: space-between; gap: 28px; border: none; border-radius: 7px; padding: 13px 20px; background: var(--green); color: white; font: 600 14px "Segoe UI", Arial, sans-serif; cursor: pointer; }
+button:hover { background: #194b3b; }
+button span { font-size: 19px; line-height: 1; }
+.clear { color: var(--muted); font-size: 13px; text-underline-offset: 4px; }
+/* Prediction states and the recorded model evaluation card. */
+.side-panel { display: grid; gap: 18px; }
+.result-panel { min-height: 257px; padding: 27px; border: 1px solid #d7e2d3; border-radius: 14px; background: #eaf0e5; }
+.result-panel .eyebrow { font-size: 10px; }
+.result-icon { display: grid; place-items: center; width: 38px; height: 38px; margin: 20px 0 16px; border: 1px solid #a6bfa3; border-radius: 50%; font: 24px Georgia, serif; }
+.result-panel h2 { font: 400 26px/1.2 Georgia, serif; }
+.result-panel p:not(.eyebrow) { margin: 12px 0 0; color: #50634f; font-size: 13px; }
+.real { color: #205c43; }
+.fake { color: #8b3c25; }
+.result-icon.fake { border-color: #b77e62; }
+.result-panel .result-detail { font-weight: 600; }
+.model-panel { padding: 22px 26px; border: 1px solid var(--line); border-radius: 14px; }
+.model-panel h2 { font-size: 13px; }
+.stat { display: flex; flex-wrap: wrap; align-items: baseline; gap: 12px; margin: 12px 0 7px; }
+.stat strong { font-size: 31px; line-height: 1.2; letter-spacing: -1px; }
+.stat span { color: var(--muted); font-size: 11px; }
+.model-panel p { margin: 0; color: var(--muted); font-size: 12px; }
+.method { display: flex; gap: 14px; margin-top: 16px; color: var(--green); font-size: 11px; font-weight: 600; }
+/* Model limitations, validation messages, and footer. */
+.notice { display: flex; gap: 16px; margin: 28px 0 38px; padding: 20px 0; border-top: 1px solid var(--line); }
+.notice-mark { display: grid; place-items: center; flex-shrink: 0; width: 21px; height: 21px; border: 1px solid #83958b; border-radius: 50%; font: italic 14px Georgia, serif; }
+.notice h2 { font-size: 13px; }
+.notice p { max-width: 850px; margin: 5px 0 0; font-size: 12px; color: var(--muted); }
+.error { color: #9b3523; font-size: 13px; }
+footer { display: flex; justify-content: space-between; gap: 16px; padding: 20px 0 28px; border-top: 1px solid var(--line); color: var(--muted); font-size: 11px; }
+
+/* Smaller screens: stack the form and results into a single column. */
+@media (max-width: 720px) {
+  .page { padding: 0 20px; }
+  header { padding: 20px 0; }
+  .header-note { display: none; }
+  .intro { padding-top: 34px; }
+  h1 { font-size: 49px; }
+  .workspace { grid-template-columns: 1fr; }
+  .article-panel { padding: 22px; }
+  textarea { min-height: 230px; }
+  .result-panel { min-height: auto; }
+  footer { flex-direction: column; gap: 4px; }
+}

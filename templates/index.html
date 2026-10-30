@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Explore how a trained SVM classifies news article text.">
+  <title>NewsCheck — Article Classifier</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="page">
+    <header>
+      <a class="brand" href="{{ url_for('index') }}"><span class="brand-mark">N</span> NewsCheck<span class="brand-dot">.</span></a>
+      <span class="header-note">A machine learning experiment</span>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">READ. QUESTION. EXPLORE.</p>
+        <h1 id="page-title">A second look<br>at the news.</h1>
+        <p class="intro-copy">Paste an article and see how a trained machine learning model classifies its text.</p>
+      </section>
+
+      <div class="workspace">
+        <section class="article-panel" aria-labelledby="article-heading">
+          <div class="panel-heading">
+            <h2 id="article-heading">Your article</h2>
+            <span class="tag">ENGLISH TEXT</span>
+          </div>
+          {# Submit to the Flask index route; no JavaScript is needed. #}
+          <form method="post" action="{{ url_for('index') }}">
+            <label for="article">Paste the full article body</label>
+            {# Jinja escapes article text automatically when displaying it again. #}
+            <textarea id="article" name="article" required maxlength="50000"
+              aria-describedby="input-help{% if error %} input-error{% endif %}"
+              {% if error %}aria-invalid="true"{% endif %}
+              placeholder="Start with the article text, rather than a headline or link…">{{ article }}</textarea>
+            <p id="input-help" class="help">Full articles work best. Up to 50,000 characters.</p>
+            {% if error %}<p id="input-error" class="error" role="alert">{{ error }}</p>{% endif %}
+            <div class="actions">
+              <button type="submit">Analyze article <span aria-hidden="true">↗</span></button>
+              {# A fresh GET clears both the text and the previous prediction. #}
+              <a class="clear" href="{{ url_for('index') }}">Clear</a>
+            </div>
+          </form>
+        </section>
+
+        <aside class="side-panel">
+          <section class="result-panel" aria-labelledby="result-heading" aria-live="polite">
+            <p class="eyebrow" id="result-heading">MODEL PREDICTION</p>
+            {# Show a prediction after a successful POST, otherwise show the prompt. #}
+            {% if result %}
+              <span class="result-icon {{ result|lower }}" aria-hidden="true">{% if result == 'Real' %}✓{% else %}!{% endif %}</span>
+              <h2 class="prediction {{ result|lower }}">Predicted {{ result }}</h2>
+              <p>The model found text patterns associated with articles labeled <strong>{{ result|lower }}</strong> in its training data.</p>
+              <p class="result-detail">This prediction is not a factual verdict.</p>
+            {% else %}
+              <span class="result-icon waiting" aria-hidden="true">?</span>
+              <h2>Ready when you are.</h2>
+              <p>Your article’s prediction will appear here after you select Analyze article.</p>
+            {% endif %}
+          </section>
+
+          {# These figures come from metrics.json, not prediction confidence. #}
+          <section class="model-panel" aria-labelledby="model-heading">
+            <h2 id="model-heading">Behind the prediction</h2>
+            <div class="stat"><strong>{{ accuracy }}</strong><span>dataset test accuracy</span></div>
+            <p>Evaluated on {{ test_count }} held-out articles from the Fake and Real News Dataset.</p>
+            <div class="method"><span>TF-IDF</span><span aria-hidden="true">→</span><span>Linear SVM</span></div>
+          </section>
+        </aside>
+      </div>
+
+      <section class="notice" aria-labelledby="notice-heading">
+        <span class="notice-mark" aria-hidden="true">i</span>
+        <div><h2 id="notice-heading">A text classifier, with limits.</h2>
+          <p>This model identifies patterns in text. It does not verify facts or sources. Its test accuracy applies to a historical dataset and may differ on new articles. Check important claims against reliable sources.</p></div>
+      </section>
+    </main>
+
+    <footer><span>NewsCheck · Built for learning.</span><span>TF-IDF + Support Vector Machine</span></footer>
+  </div>
+</body>
+</html>
