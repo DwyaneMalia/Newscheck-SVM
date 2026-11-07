@@ -39,6 +39,7 @@ def index():
             result = {0: "Fake", 1: "Real"}[prediction]
 
     # Keep submitted text visible and send the result/error to the same page.
+    report = metrics["classification_report"]
     return render_template(
         "index.html",
         article=article,
