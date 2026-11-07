@@ -52,6 +52,7 @@ def index():
         fake_recall=f"{report['Fake']['recall']:.2%}",
         real_precision=f"{report['Real']['precision']:.2%}",
         real_recall=f"{report['Real']['recall']:.2%}",
+        confusion_matrix=metrics["confusion_matrix"],
     )
 
 
