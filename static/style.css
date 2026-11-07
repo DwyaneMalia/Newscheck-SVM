@@ -28,7 +28,7 @@ h2 { margin: 0; font-size: 18px; line-height: 1.4; }
 .tag { padding: 4px 8px; background: #f0f3ee; border-radius: 4px; color: var(--muted); font-size: 9px; letter-spacing: 1px; white-space: nowrap; }
 /* Article input and form actions, including visible keyboard focus. */
 label { display: block; margin-bottom: 9px; font-size: 13px; font-weight: 600; }
-textarea { display: block; width: 100%; min-height: 273px; padding: 16px; resize: vertical; border: 1px solid #ced8d1; border-radius: 8px; background: #fcfdfb; color: var(--ink); font: 14px/1.7 "Segoe UI", Arial, sans-serif; }
+textarea { display: block; width: 100%; min-height: 220px; padding: 16px; resize: vertical; border: 1px solid #ced8d1; border-radius: 8px; background: #fcfdfb; color: var(--ink); font: 14px/1.7 "Segoe UI", Arial, sans-serif; }
 textarea::placeholder { color: #788481; }
 textarea:focus-visible, a:focus-visible, button:focus-visible { outline: 3px solid #86bba2; outline-offset: 3px; }
 .help { color: var(--muted); font-size: 12px; margin: 10px 0 22px; }
@@ -81,6 +81,9 @@ footer { display: flex; justify-content: space-between; gap: 16px; padding: 20px
 .confusion { width: 100%; margin-top: 8px; border-collapse: collapse; font-size: 12px; }
 .confusion th, .confusion td { padding: 7px; border: 1px solid var(--line); text-align: center; }
 .confusion caption { margin-bottom: 6px; color: var(--muted); }
+.evaluation-details { margin-top: 14px; }
+.evaluation-details summary { color: var(--green); font-size: 12px; font-weight: 600; cursor: pointer; }
+.evaluation-details h3 { margin: 14px 0 6px; }
 
 .project-info { margin: 24px 0; padding: 24px; border: 1px solid var(--line); border-radius: 14px; }
 .project-info h2 { margin: 0 0 8px; }

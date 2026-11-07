@@ -32,8 +32,9 @@ local development server.
 The form submits to `/` using POST. The Python route calls
 `model.predict([article])`; 0 maps to Fake and 1 maps to Real. The saved pipeline
 already includes TF-IDF, so the website passes the original text directly to it.
-The browser escapes article text when displaying it. Blank input and articles
-longer than 50,000 characters are rejected. Articles are not saved by the app.
+The browser escapes article text when displaying it. Blank input, text shorter
+than 100 characters, and articles longer than 50,000 characters are rejected.
+Articles are not saved by the app.
 
 ## Included model files
 

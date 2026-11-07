@@ -31,7 +31,7 @@
           <form method="post" action="{{ url_for('index') }}">
             <label for="article">Paste the full article body</label>
             {# Jinja escapes article text automatically when displaying it again. #}
-            <textarea id="article" name="article" required maxlength="50000"
+            <textarea id="article" name="article" required minlength="{{ min_article_length }}" maxlength="50000"
               aria-describedby="input-help{% if error %} input-error{% endif %}"
               {% if error %}aria-invalid="true"{% endif %}
               placeholder="Start with the article text, rather than a headline or link…">{{ article }}</textarea>
@@ -39,7 +39,7 @@
               <button type="button" data-sample="fake">Load Fake-labeled sample</button>
               <button type="button" data-sample="real">Load Real-labeled sample</button>
             </div>
-            <p id="input-help" class="help">Full articles work best. Up to 50,000 characters.</p>
+            <p id="input-help" class="help">Enter at least {{ min_article_length }} characters. Full articles work best; maximum 50,000.</p>
             {% if error %}<p id="input-error" class="error" role="alert">{{ error }}</p>{% endif %}
             <div class="actions">
               <button type="submit">Analyze article <span aria-hidden="true">↗</span></button>
@@ -71,29 +71,32 @@
             <div class="stat"><strong>{{ accuracy }}</strong><span>dataset test accuracy</span></div>
             <p>Trained on {{ training_count }} articles and evaluated on {{ test_count }} held-out articles.</p>
             <div class="method"><span>TF-IDF</span><span aria-hidden="true">→</span><span>Linear SVM</span></div>
-            <h3>Class metrics</h3>
-            <p>Fake: precision {{ fake_precision }}, recall {{ fake_recall }}</p>
-            <p>Real: precision {{ real_precision }}, recall {{ real_recall }}</p>
+            <details class="evaluation-details">
+              <summary>More evaluation details</summary>
+              <h3>Class metrics</h3>
+              <p>Fake: precision {{ fake_precision }}, recall {{ fake_recall }}</p>
+              <p>Real: precision {{ real_precision }}, recall {{ real_recall }}</p>
 
-            <h3>Confusion matrix</h3>
-            <table class="confusion">
-              <caption>Rows are actual labels; columns are predicted labels.</caption>
-              <thead>
-                <tr><th>Actual \ Predicted</th><th>Fake</th><th>Real</th></tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <th>Fake</th>
-                  <td>{{ confusion_matrix.actual_fake.predicted_fake }}</td>
-                  <td>{{ confusion_matrix.actual_fake.predicted_real }}</td>
-                </tr>
-                <tr>
-                  <th>Real</th>
-                  <td>{{ confusion_matrix.actual_real.predicted_fake }}</td>
-                  <td>{{ confusion_matrix.actual_real.predicted_real }}</td>
-                </tr>
-              </tbody>
-            </table>
+              <h3>Confusion matrix</h3>
+              <table class="confusion">
+                <caption>Rows are actual labels; columns are predicted labels.</caption>
+                <thead>
+                  <tr><th>Actual \ Predicted</th><th>Fake</th><th>Real</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>Fake</th>
+                    <td>{{ confusion_matrix.actual_fake.predicted_fake }}</td>
+                    <td>{{ confusion_matrix.actual_fake.predicted_real }}</td>
+                  </tr>
+                  <tr>
+                    <th>Real</th>
+                    <td>{{ confusion_matrix.actual_real.predicted_fake }}</td>
+                    <td>{{ confusion_matrix.actual_real.predicted_real }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </details>
           </section>
         </aside>
       </div>

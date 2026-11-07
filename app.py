@@ -10,6 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent
 app = Flask(__name__)
 # Flask rejects requests over this byte limit before the route processes them.
 app.config["MAX_CONTENT_LENGTH"] = 1_000_000
+MIN_ARTICLE_LENGTH = 100
 
 # Load the saved TF-IDF + SVM pipeline once when the app starts.
 model = joblib.load(BASE_DIR / "fake_news_svm.joblib")
@@ -30,6 +31,8 @@ def index():
         # Check input on the server as well as through the HTML form controls.
         if not article:
             error = "Paste an article before analyzing."
+        elif len(article) < MIN_ARTICLE_LENGTH:
+            error = f"Please paste at least {MIN_ARTICLE_LENGTH} characters so the model has enough article text to analyze."
         elif len(article) > 50_000:
             error = "Please use an article with 50,000 characters or fewer."
         else:
@@ -44,6 +47,7 @@ def index():
         article=article,
         result=result,
         error=error,
+        min_article_length=MIN_ARTICLE_LENGTH,
         accuracy=f"{metrics['test_accuracy']:.2%}",
         training_count=f"{metrics['training_articles']:,}",
         test_count=f"{metrics['testing_articles']:,}",
