@@ -35,6 +35,10 @@
               aria-describedby="input-help{% if error %} input-error{% endif %}"
               {% if error %}aria-invalid="true"{% endif %}
               placeholder="Start with the article text, rather than a headline or link…">{{ article }}</textarea>
+            <div class="sample-actions">
+              <button type="button" data-sample="fake">Load Fake-labeled sample</button>
+              <button type="button" data-sample="real">Load Real-labeled sample</button>
+            </div>
             <p id="input-help" class="help">Full articles work best. Up to 50,000 characters.</p>
             {% if error %}<p id="input-error" class="error" role="alert">{{ error }}</p>{% endif %}
             <div class="actions">
@@ -112,5 +116,6 @@
 
     <footer><span>NewsCheck · Built for learning.</span><span>TF-IDF + Support Vector Machine</span></footer>
   </div>
+  <script src="{{ url_for('static', filename='examples.js') }}" defer></script>
 </body>
 </html>
