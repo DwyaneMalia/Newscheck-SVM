@@ -2,9 +2,10 @@
 
 An AI and Machine Learning group project for **1833 CST 9/L**.
 
-A small Flask website that classifies full English news articles with your
-Colab-trained TF-IDF + Linear SVM pipeline. No JavaScript, database, or account
-is needed.
+A small Flask website that classifies English news article text with a saved
+TF-IDF + Linear SVM pipeline. It includes sample articles, model evaluation
+metrics, and a confusion matrix. A small JavaScript file loads the samples;
+the app needs no database or account.
 
 ## Run locally
 
@@ -16,15 +17,17 @@ py -3.13 -m venv .venv
 .venv\Scripts\python app.py
 ```
 
-Open http://127.0.0.1:5000 in your browser. Paste an article and select
-**Analyze article**. Select **Clear** to reset the page. Press Ctrl+C in the
-terminal to stop the server. This command runs a local development server.
+Open http://127.0.0.1:5000 in your browser. Paste an article or select one of
+the sample buttons, then choose **Analyze article**. Select **Clear** to reset
+the page. Press Ctrl+C in the terminal to stop the server. This command runs a
+local development server.
 
 ## Code to review
 
 - `app.py`: loads the model once, checks the input, and renders the prediction.
-- `templates/index.html`: the form, result, and model information.
+- `templates/index.html`: the form, result, evaluation, confusion matrix, and project information.
 - `static/style.css`: layout, colors, and mobile styling.
+- `static/examples.js`: fills the form with sample article text.
 
 The form submits to `/` using POST. The Python route calls
 `model.predict([article])`; 0 maps to Fake and 1 maps to Real. The saved pipeline
