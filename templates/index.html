@@ -35,6 +35,10 @@
               aria-describedby="input-help{% if error %} input-error{% endif %}"
               {% if error %}aria-invalid="true"{% endif %}
               placeholder="Start with the article text, rather than a headline or link…">{{ article }}</textarea>
+            <div class="sample-actions">
+              <button type="button" data-sample="fake">Load Fake-labeled sample</button>
+              <button type="button" data-sample="real">Load Real-labeled sample</button>
+            </div>
             <p id="input-help" class="help">Full articles work best. Up to 50,000 characters.</p>
             {% if error %}<p id="input-error" class="error" role="alert">{{ error }}</p>{% endif %}
             <div class="actions">
@@ -65,11 +69,43 @@
           <section class="model-panel" aria-labelledby="model-heading">
             <h2 id="model-heading">Behind the prediction</h2>
             <div class="stat"><strong>{{ accuracy }}</strong><span>dataset test accuracy</span></div>
-            <p>Evaluated on {{ test_count }} held-out articles from the Fake and Real News Dataset.</p>
+            <p>Trained on {{ training_count }} articles and evaluated on {{ test_count }} held-out articles.</p>
             <div class="method"><span>TF-IDF</span><span aria-hidden="true">→</span><span>Linear SVM</span></div>
+            <h3>Class metrics</h3>
+            <p>Fake: precision {{ fake_precision }}, recall {{ fake_recall }}</p>
+            <p>Real: precision {{ real_precision }}, recall {{ real_recall }}</p>
+
+            <h3>Confusion matrix</h3>
+            <table class="confusion">
+              <caption>Rows are actual labels; columns are predicted labels.</caption>
+              <thead>
+                <tr><th>Actual \ Predicted</th><th>Fake</th><th>Real</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Fake</th>
+                  <td>{{ confusion_matrix.actual_fake.predicted_fake }}</td>
+                  <td>{{ confusion_matrix.actual_fake.predicted_real }}</td>
+                </tr>
+                <tr>
+                  <th>Real</th>
+                  <td>{{ confusion_matrix.actual_real.predicted_fake }}</td>
+                  <td>{{ confusion_matrix.actual_real.predicted_real }}</td>
+                </tr>
+              </tbody>
+            </table>
           </section>
         </aside>
       </div>
+
+      <section class="project-info">
+        <h2>How it works</h2>
+        <p>Article text → TF-IDF text features → Linear SVM → Fake or Real prediction</p>
+
+        <h2>About this project</h2>
+        <p>NewsCheck demonstrates supervised text classification on historical English-language news articles. It classifies text patterns associated with the dataset labels; it does not verify facts.</p>
+        <p>For important claims, check the publisher, date, author, cited sources, and other reliable reporting.</p>
+      </section>
 
       <section class="notice" aria-labelledby="notice-heading">
         <span class="notice-mark" aria-hidden="true">i</span>
@@ -80,5 +116,6 @@
 
     <footer><span>NewsCheck · Built for learning.</span><span>TF-IDF + Support Vector Machine</span></footer>
   </div>
+  <script src="{{ url_for('static', filename='examples.js') }}" defer></script>
 </body>
 </html>

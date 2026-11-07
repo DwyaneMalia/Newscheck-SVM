@@ -34,5 +34,15 @@
       "f1-score": 0.9900914326177075,
       "support": 7674.0
     }
+  },
+  "confusion_matrix": {
+    "actual_fake": {
+      "predicted_fake": 3431,
+      "predicted_real": 58
+    },
+    "actual_real": {
+      "predicted_fake": 18,
+      "predicted_real": 4167
+    }
   }
 }

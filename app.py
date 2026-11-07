@@ -46,12 +46,13 @@ def index():
         result=result,
         error=error,
         accuracy=f"{metrics['test_accuracy']:.2%}",
-        test_count=f"{metrics['testing_articles']:,}",
         training_count=f"{metrics['training_articles']:,}",
-        fake_precision=f"{report['Fake']['precision']:.2%}",
-        fake_recall=f"{report['Fake']['recall']:.2%}",
-        real_precision=f"{report['Real']['precision']:.2%}",
-        real_recall=f"{report['Real']['recall']:.2%}",
+        test_count=f"{metrics['testing_articles']:,}",
+        fake_precision=f"{metrics['classification_report']['Fake']['precision']:.2%}",
+        fake_recall=f"{metrics['classification_report']['Fake']['recall']:.2%}",
+        real_precision=f"{metrics['classification_report']['Real']['precision']:.2%}",
+        real_recall=f"{metrics['classification_report']['Real']['recall']:.2%}",
+        confusion_matrix=metrics["confusion_matrix"],
     )
 
 
