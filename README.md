@@ -11,7 +11,7 @@ is needed.
 Install Python 3.13, then open a terminal in this folder:
 
 ```powershell
-python -m venv .venv
+py -3.13 -m venv .venv
 .venv\Scripts\python -m pip install -r requirements.txt
 .venv\Scripts\python app.py
 ```
