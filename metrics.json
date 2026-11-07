@@ -6,6 +6,16 @@
     "0": "Fake",
     "1": "Real"
   },
+  "confusion_matrix": {
+    "actual_fake": {
+      "predicted_fake": 3431,
+      "predicted_real": 58
+    },
+    "actual_real": {
+      "predicted_fake": 18,
+      "predicted_real": 4167
+    }
+  },
   "input": "Full English article body",
   "python_version": "3.13.18",
   "classification_report": {
