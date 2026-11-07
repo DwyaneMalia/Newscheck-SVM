@@ -76,3 +76,12 @@ footer { display: flex; justify-content: space-between; gap: 16px; padding: 20px
   .result-panel { min-height: auto; }
   footer { flex-direction: column; gap: 4px; }
 }
+
+.model-panel h3 { margin: 16px 0 6px; font-size: 13px; }
+.confusion { width: 100%; margin-top: 8px; border-collapse: collapse; font-size: 12px; }
+.confusion th, .confusion td { padding: 7px; border: 1px solid var(--line); text-align: center; }
+.confusion caption { margin-bottom: 6px; color: var(--muted); }
+
+.project-info { margin: 24px 0; padding: 24px; border: 1px solid var(--line); border-radius: 14px; }
+.project-info h2 { margin: 0 0 8px; }
+.project-info h2:not(:first-child) { margin-top: 20px; }
