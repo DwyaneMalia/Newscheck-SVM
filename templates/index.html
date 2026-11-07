@@ -65,8 +65,31 @@
           <section class="model-panel" aria-labelledby="model-heading">
             <h2 id="model-heading">Behind the prediction</h2>
             <div class="stat"><strong>{{ accuracy }}</strong><span>dataset test accuracy</span></div>
-            <p>Evaluated on {{ test_count }} held-out articles from the Fake and Real News Dataset.</p>
+            <p>Trained on {{ training_count }} articles and evaluated on {{ test_count }} held-out articles.</p>
             <div class="method"><span>TF-IDF</span><span aria-hidden="true">→</span><span>Linear SVM</span></div>
+            <h3>Class metrics</h3>
+            <p>Fake: precision {{ fake_precision }}, recall {{ fake_recall }}</p>
+            <p>Real: precision {{ real_precision }}, recall {{ real_recall }}</p>
+
+            <h3>Confusion matrix</h3>
+            <table class="confusion">
+              <caption>Rows are actual labels; columns are predicted labels.</caption>
+              <thead>
+                <tr><th>Actual \ Predicted</th><th>Fake</th><th>Real</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>Fake</th>
+                  <td>{{ confusion_matrix.actual_fake.predicted_fake }}</td>
+                  <td>{{ confusion_matrix.actual_fake.predicted_real }}</td>
+                </tr>
+                <tr>
+                  <th>Real</th>
+                  <td>{{ confusion_matrix.actual_real.predicted_fake }}</td>
+                  <td>{{ confusion_matrix.actual_real.predicted_real }}</td>
+                </tr>
+              </tbody>
+            </table>
           </section>
         </aside>
       </div>
